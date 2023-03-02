@@ -4,16 +4,20 @@ rm -rf student-submission
 rm -rf UnitTest.txt
 rm -rf javacError.txt
 git clone $1 student-submission
-echo 'Finished cloning'
-if [ $? -ne 0 ]; then
-    echo 'Error cloning repository Try renaming your repository to 
-    student-submission'
+if [[ $? -eq 0 ]]
+then
+    echo 'Cloned repository successfully'
+else
+    echo 'Error cloning repository'
     exit 1
 fi
 cp student-submission/ListExamples.java ./
 javac -cp $CPATH *.java 2>javacError.txt
-if [ $? -ne 0 ]; then
-    echo 'Error compiling tests'
+if [[ $? -eq 0 ]]
+then
+    echo 'Compiled successfully'
+else
+    echo 'Error compiling'
     cat javacError.txt
     exit 1
 fi
